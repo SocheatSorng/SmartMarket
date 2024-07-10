@@ -1,0 +1,29 @@
+<?php
+$servername = "localhost";
+$username = "socheat";
+$password = "2016@Socheat";
+$dbname = "productdb";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to select data
+$sql = "SELECT * FROM products where id=1";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"] . " - Title: " . $row["title"] . " - Price " . $row["price"];
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
